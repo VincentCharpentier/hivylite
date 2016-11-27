@@ -1,0 +1,176 @@
+$app-maxWidth: 1500px
+
+$bg-color: #FFF
+$highlight-color: hsla(210,100%,65%,1)
+// hsl(213,70%,75%)
+$border-color: #555
+
+$border-radius: 3px
+$contentbox-padding: .5rem 1rem
+
+@mixin contentbox()
+    padding: $contentbox-padding
+    border: 1px solid $border-color
+
+
+$mobile-breakpoint: 700px
+
+body
+  padding: 50px
+  // Default font size a little bigger than system default
+  font: 1.2rem "Lucida Grande", Helvetica, Arial, sans-serif
+
+#mainWrapper
+    display: flex
+    flex-direction: column
+    max-width: $app-maxWidth
+    margin: 0 auto
+
+a
+  color: #00B7FF
+
+
+.AppContainer
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+    justify-content: center
+
+.ListItem
+    border: 0px solid $border-color
+    border-bottom-width: 1px
+    padding: $contentbox-padding
+    text-overflow: ellipsis
+    overflow: hidden
+
+    // &:first-child
+    //     border-top-left-radius: $border-radius
+    //     border-top-right-radius: $border-radius
+    &:last-child
+        border-bottom-width: 0
+    //     border-bottom-left-radius: $border-radius
+    //     border-bottom-right-radius: $border-radius
+    //     margin-bottom: 0
+
+.RequestList
+    @include contentbox()
+    border-radius: $border-radius
+    list-style-type: none
+    padding: 0
+    margin: 0
+    flex: 3
+    max-width: 800px
+
+    .ListItem
+        cursor: pointer
+
+.NewRequestForm
+    @include contentbox()
+    border-radius: $border-radius
+    margin-right: 1rem
+    flex: 1
+    max-width: 400px
+
+    h2
+        margin-top: 0
+
+    .InputRow ~ .InputRow
+        margin-top: 10px
+
+    input, select, .cancelButton
+        width: 100%
+        font-size: 1.2rem
+        padding: .5rem
+        border: 1px solid hsl(0,0%,15%)
+        box-sizing: border-box
+        border-radius: 3px
+
+    .Buttons
+        display: flex
+        justify-content: space-between
+
+        .cancelButton, input[type='submit']
+            max-width: 200px
+            width: auto
+            font-weight: bold
+            font-size: .8rem
+            border: 0
+            cursor: pointer
+            color: #FFF
+            background-color: #FFF
+            border-style: inset
+            border-width: 1px
+            transition-property: color, background-color
+            transition-duration: 200ms
+            transition-timing-function: ease-in-out
+            &:hover
+                color: #FFF
+
+        .cancelButton
+            height: 100%
+            box-sizing: border-box
+            border-radius: 3px
+            color: $border-color
+            border-color: $border-color
+            &:hover
+                background-color: $border-color
+
+        input[type='submit']
+            color: $highlight-color
+            border-color: $highlight-color
+            &:hover
+                background-color: $highlight-color
+
+    // Show SuggestionList only if title input has focus
+    .titleInput:focus ~ .SuggestionList
+        display: block
+    .SuggestionList:hover
+        display: block
+
+    .label
+        text-transform: uppercase
+        font-size: .8rem
+        font-weight: bold
+
+    .SuggestionList
+        display: none
+        position: absolute
+        z-index: 100000
+        background: #FFF
+        margin: 0
+        margin-top: -2px
+        list-style-type: none
+        padding: 0
+        box-shadow: 0 1pt 3pt -1pt
+        border-radius: 0 0 3px 3px
+        max-height: 200px
+        min-width: 100%
+        max-width: 250px
+        overflow-y: auto
+        overflow-x: hidden
+        white-space: nowrap
+
+        .ListItem
+            font-size: 1rem
+            cursor: pointer
+
+            &:hover
+                background: $highlight-color
+
+
+
+// -----------------------------------------------------------------------------
+// Mobile Only
+
+$breakpoint: 700px
+
+@media screen and (max-width:$breakpoint)
+    .AppContainer
+        flex-direction: column
+        align-items: stretch
+
+
+    .NewRequestForm
+        margin: 0
+        margin-bottom: 1rem
+        max-width: none
