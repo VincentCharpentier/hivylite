@@ -1,2 +1,5 @@
 bin/
 node_modules/
+public/javascripts
+public/stylesheets/*.css
+public/stylesheets/*.css.map
